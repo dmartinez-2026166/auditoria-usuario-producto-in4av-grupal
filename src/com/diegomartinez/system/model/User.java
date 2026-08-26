@@ -1,23 +1,15 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.diegomartinez.system.model;
 
-/**
- *
- * @author informatica
- */
 public class User {
+
     private String name;
     private String lastname;
     private String email;
     private String password;
     private String user;
     private String idUser;
-    
-    
-    public User(){
+
+    public User() {
     }
 
     public User(String name, String lastname, String email, String password, String user, String idUser) {
@@ -36,8 +28,6 @@ public class User {
         this.user = user;
         this.idUser = idUser;
     }
-    
-    
 
     public String getName() {
         return name;
@@ -86,7 +76,5 @@ public class User {
     public void setIdUser(String idUser) {
         this.idUser = idUser;
     }
-    
-    
-    
+
 }
