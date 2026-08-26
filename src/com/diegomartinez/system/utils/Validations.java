@@ -24,22 +24,23 @@ public class Validations {
 
     public Boolean validateEmail(String email) {
         int dotCount = 0, arrobeCount = 0;
+        //Valida el punto
         for (int index = 0; index < email.length(); index++) {
             if (email.charAt(index) == '.') {
                 dotCount++;
-                if (dotCount > 1) {
-                    return false;
-                }
+            }
+            if (dotCount > 1) {
+                return false;
             }
         }
-
+        //VALIDAR CANTIDAD ARROBAS
         for (int index = 0; index < email.length(); index++) {
             if (email.charAt(index) == '@') {
                 arrobeCount++;
-                if (arrobeCount != 1) {
-                    return false;
-                }
             }
+        }
+        if (arrobeCount != 1) {
+            return false;
         }
         return true;
     }
