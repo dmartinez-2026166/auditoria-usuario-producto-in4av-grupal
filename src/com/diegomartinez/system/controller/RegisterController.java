@@ -54,9 +54,9 @@ public class RegisterController implements Initializable {
         }
 
         String user, name, lastName, password, confirmPassword;
-        user = txtUser.getText().trim();
         name = txtName.getText().trim();
         lastName = txtLastName.getText().trim();
+        user = txtUser.getText().trim();
         password = pwdPassword.getText().trim();
         confirmPassword = pwdConfirmPassword.getText().trim();
 
@@ -66,7 +66,37 @@ public class RegisterController implements Initializable {
                 || validate.validateTextEmpty(lastName) == true
                 || validate.validateTextEmpty(password) == true
                 || validate.validateTextEmpty(confirmPassword) == true) {
+            alertInfo.viewAlert("ERROR", "ERROR DE CAMPO", "ERROR CAMPOS VACÍOS", "NO LLENASTE TODOS LOS CAMPOS");
+            return;
+        }
 
+        String msgfield = "";
+        if (validate.validateTextLength(user, 25) == false) {
+            msgfield = "El campo USUARIO es mayor a 25 letras";
+        }
+        if (validate.validateTextLength(name, 50) == false) {
+            msgfield = "El campo NOMBRE es mayor a 50 letras";
+        }
+        if (validate.validateTextLength(lastName, 50) == false) {
+            msgfield = "El campo APELLIDO es mayor a 50 letras";
+        }
+        if (validate.validateTextLength(email, 50) == false) {
+            msgfield = "El campo EMAIL es mayor a 50 letras";
+        }
+        if (validate.validateTextLength(password, 35) == false) {
+            msgfield = "El campo CONTRASEÑA es mayor a 35 letras";
+        }
+        if (validate.validateTextLength(confirmPassword, 35) == false) {
+            msgfield = "El campo COMFIRMAR CONTRASEÑA es mayor a 35 letras";
+        }
+        if (msgfield.isEmpty() == false) {
+            alertInfo.viewAlert("ERROR", "ERROR DE CAMPO", "ERROR LONGITUD DE CAMPO", msgfield);
+            return;
+        }
+        
+        if(validate.equalsText(password, confirmPassword) == false) {
+            alertInfo.viewAlert("ERROR", "ERROR DE CONTRASEÑA", "ERROR AL CONFIRMAR CONTRASEÑA", "LAS CONTRASEÑAS NO COINCIDEN");
+            return;
         }
     }
 }

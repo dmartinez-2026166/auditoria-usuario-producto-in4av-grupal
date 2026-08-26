@@ -21,12 +21,12 @@ public class User {
         this.idUser = idUser;
     }
 
-    public User(String name, String lastname, String email, String user, String idUser) {
+    public User(String name, String lastname, String email, String password, String user) {
         this.name = name;
         this.lastname = lastname;
         this.email = email;
+        this.password = password;
         this.user = user;
-        this.idUser = idUser;
     }
 
     public String getName() {

@@ -3,6 +3,7 @@ package com.diegomartinez.system.repository;
 import com.diegomartinez.system.model.User;
 import java.sql.CallableStatement;
 import com.diegomartinez.system.config.ConexionDB;
+import java.sql.SQLException;
  
 public class UserRepository implements UserInterface {
  
@@ -20,7 +21,10 @@ public class UserRepository implements UserInterface {
             callSP.setString(5, user.getPassword());
             callSP.execute();
             callSP.close();
-        } catch (Exception e) {
+        } catch (SQLException e) {
+            System.out.println("Error al crear usuario repository");
+            System.out.println(e.getMessage());
+            e.printStackTrace();
         }
     }
 }
