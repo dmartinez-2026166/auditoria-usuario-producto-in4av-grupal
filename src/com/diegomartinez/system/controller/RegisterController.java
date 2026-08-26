@@ -1,5 +1,6 @@
 package com.diegomartinez.system.controller;
 
+import com.diegomartinez.system.utils.AlertInformation;
 import com.diegomartinez.system.utils.Validations;
 import com.diegomartinez.system.utils.ViewFactory;
 import java.net.URL;
@@ -30,7 +31,8 @@ public class RegisterController implements Initializable {
     @FXML
     private Button btnCreateUser;
     private Validations validate = new Validations();
-    
+    private AlertInformation alertInfo = new AlertInformation();
+
     @Override
     public void initialize(URL url, ResourceBundle rb) {
 
@@ -41,15 +43,30 @@ public class RegisterController implements Initializable {
         ViewFactory viewFacto = new ViewFactory();
         viewFacto.viewLogin();
     }
-    
+
     @FXML
     public void OnRegisterUser(MouseEvent event) {
         String email = txtEmail.getText().trim();
         boolean validEmail = validate.validateEmail(email);
-        if(validEmail == true) {
-            System.out.println("Si está válido");
-        } else {
-            System.out.println("NO está válido");
+        if (validEmail == false) {
+            alertInfo.viewAlert("ERROR", "ERROR DE EMAIL", "ERROR CAMPO EMAIL", "INGRESASTE UN EMAIL INCORRECTO");
+            return;
+        }
+
+        String user, name, lastName, password, confirmPassword;
+        user = txtUser.getText().trim();
+        name = txtName.getText().trim();
+        lastName = txtLastName.getText().trim();
+        password = pwdPassword.getText().trim();
+        confirmPassword = pwdConfirmPassword.getText().trim();
+
+        if (validate.validateTextEmpty(user) == true
+                || validate.validateTextEmpty(name) == true
+                || validate.validateTextEmpty(email) == true
+                || validate.validateTextEmpty(lastName) == true
+                || validate.validateTextEmpty(password) == true
+                || validate.validateTextEmpty(confirmPassword) == true) {
+
         }
     }
 }
