@@ -1,5 +1,7 @@
 package com.diegomartinez.system.controller;
 
+import com.diegomartinez.system.service.UserService;
+import com.diegomartinez.system.service.UserStatus;
 import com.diegomartinez.system.utils.AlertInformation;
 import com.diegomartinez.system.utils.Validations;
 import com.diegomartinez.system.utils.ViewFactory;
@@ -32,6 +34,7 @@ public class RegisterController implements Initializable {
     private Button btnCreateUser;
     private Validations validate = new Validations();
     private AlertInformation alertInfo = new AlertInformation();
+    private UserService userService = new UserService();
 
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -97,6 +100,15 @@ public class RegisterController implements Initializable {
         if(validate.equalsText(password, confirmPassword) == false) {
             alertInfo.viewAlert("ERROR", "ERROR DE CONTRASEÑA", "ERROR AL CONFIRMAR CONTRASEÑA", "LAS CONTRASEÑAS NO COINCIDEN");
             return;
+        }
+        UserStatus status = userService.createUser(user, name, lastName, email, password);
+        switch (status) {
+            case USER_CREATED ->
+                System.out.println("Se creo el usuario");
+            case ERROR_USER_CREATE ->
+                System.out.println("No se pudo crear el usuario");
+            default -> 
+                System.out.println("Error desconocido");
         }
     }
 }
